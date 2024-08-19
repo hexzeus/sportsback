@@ -1,5 +1,4 @@
 import app from './app'; // Assuming this is where your Express app is defined
-import { PORT } from './config/database'; // Assuming your environment variables are exported from here
 import sequelize from './config/database'; // Adjust the path as needed
 
 const startServer = async () => {
@@ -7,6 +6,7 @@ const startServer = async () => {
         await sequelize.sync(); // Sync models with the database
         console.log('🚀 Database connected and synced.');
 
+        const PORT = process.env.PORT || 5001; // Use environment-provided PORT or default to 5001
         app.listen(PORT, () => {
             console.log(`
                 ==============================================
@@ -17,6 +17,7 @@ const startServer = async () => {
         });
     } catch (error) {
         console.error('Unable to start the server:', error);
+        process.exit(1); // Exit the process if we can't start the server
     }
 };
 
