@@ -13,12 +13,12 @@ app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                defaultSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000"],
+                defaultSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000"], // Allow localhost and Render domain
                 scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
                 styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
                 imgSrc: ["'self'", "data:"],
                 fontSrc: ["'self'", "https://fonts.gstatic.com"],
-                connectSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000"],
+                connectSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000"], // Backend and frontend origins
             },
         },
         crossOriginEmbedderPolicy: false,
@@ -26,7 +26,10 @@ app.use(
 );
 
 // Enable CORS
-app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
+app.use(cors({
+    origin: ['http://localhost:3000', 'https://sportsback.onrender.com'], // Allow localhost and the deployed domain
+    credentials: true,
+}));
 
 // Parse JSON and URL-encoded bodies
 app.use(express.json());
