@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "target": "ES2020", // Use a modern target
+    "module": "commonjs", // Node.js module resolution
+    "strict": true, // Enable all strict type-checking options
+    "esModuleInterop": true, // Enables compatibility between CommonJS and ESModules
+    "skipLibCheck": true, // Skips type checking of all declaration files
+    "forceConsistentCasingInFileNames": true, // Ensures consistent casing in imports
+    "resolveJsonModule": true, // Allows importing JSON modules
+    "outDir": "./dist", // Output directory for compiled files
+    "rootDir": "./src", // Root directory for input files
+    "moduleResolution": "node", // Specifies module resolution strategy: Node.js style
+    "allowSyntheticDefaultImports": true // Allows default imports from modules without default exports
   },
   "include": [
     "src/**/*.ts"
