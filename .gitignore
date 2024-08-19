@@ -52,7 +52,6 @@ Dockerfile
 # yarn.lock
 # package-lock.json
 
-# Ignore any other secrets/config files:
-config/
+# Ignore other secrets but keep config files:
 secret.key
 *.pem
