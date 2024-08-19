@@ -13,12 +13,12 @@ app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                defaultSrc: ["'self'", "http://localhost:5000", "http://localhost:3000"],
+                defaultSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000"],
                 scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
                 styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
                 imgSrc: ["'self'", "data:"],
                 fontSrc: ["'self'", "https://fonts.gstatic.com"],
-                connectSrc: ["'self'", "http://localhost:5000", "http://localhost:3000"],
+                connectSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000"],
             },
         },
         crossOriginEmbedderPolicy: false,
