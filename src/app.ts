@@ -7,7 +7,7 @@ import betRoutes from './routes/betRoutes'; // Bet routes
 import { errorHandler } from './middlewares/errorHandler'; // Error handling middleware
 
 const app = express();
-const PORT = parseInt(process.env.PORT || '5000', 10); // Ensuring PORT is a number
+const PORT = process.env.PORT || 5000; // Use environment-provided PORT or default to 5000
 
 // Apply Helmet with secure CSP
 app.use(
@@ -26,11 +26,11 @@ app.use(
     })
 );
 
-// Enable CORS to allow requests from the frontend at http://localhost:3000
+// Enable CORS to allow requests from the frontend
 app.use(
     cors({
-        origin: ['http://localhost:3000', 'http://localhost:5000'], // Allow both frontend and backend origins
-        credentials: true, // Allow credentials like cookies to be sent if needed
+        origin: ['http://localhost:3000'], // Allow frontend origin
+        credentials: true, // Allow credentials like cookies to be sent
     })
 );
 
@@ -66,8 +66,8 @@ app.use((req, res) => {
     res.status(404).send('Not Found');
 });
 
-// Start the server on the updated port
-app.listen(PORT, '127.0.0.1', () => {
+// Start the server on the dynamic PORT provided by Render or fallback to 5000
+app.listen(PORT, () => {
     console.log(`🚀 Server is running on port ${PORT}`);
 });
 
