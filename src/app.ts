@@ -17,7 +17,7 @@ app.use(
                 defaultSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000", "https://fredssports.vercel.app"], // Allow localhost, Render, and Vercel domain
                 scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
                 styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-                imgSrc: ["'self'", "data:", "https://your-s3-bucket.s3.amazonaws.com"], // Allow images from your S3 bucket
+                imgSrc: ["'self'", "data:", "https://alienreviewdb.s3.us-east-2.amazonaws.com"], // Allow images from your S3 bucket
                 fontSrc: ["'self'", "https://fonts.gstatic.com"],
                 connectSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000", "https://fredssports.vercel.app"], // Backend and frontend origins
             },
