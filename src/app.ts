@@ -4,6 +4,7 @@ import cors from 'cors';
 import path from 'path';
 import adminRoutes from './routes/adminRoutes'; // Admin routes
 import betRoutes from './routes/betRoutes'; // Bet routes
+import s3Routes from './routes/s3Routes'; // S3 routes
 import { errorHandler } from './middlewares/errorHandler'; // Error handling middleware
 
 const app = express();
@@ -16,7 +17,7 @@ app.use(
                 defaultSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000", "https://fredssports.vercel.app"], // Allow localhost, Render, and Vercel domain
                 scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
                 styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-                imgSrc: ["'self'", "data:"],
+                imgSrc: ["'self'", "data:", "https://your-s3-bucket.s3.amazonaws.com"], // Allow images from your S3 bucket
                 fontSrc: ["'self'", "https://fonts.gstatic.com"],
                 connectSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000", "https://fredssports.vercel.app"], // Backend and frontend origins
             },
@@ -38,9 +39,10 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Admin and bet routes
+// Admin, bet, and S3 routes
 app.use('/api/admin', adminRoutes);
 app.use('/api/bets', betRoutes);
+app.use('/api/s3', s3Routes); // S3 routes for handling presigned URL requests
 
 // Health check route
 app.get('/health', (req, res) => res.status(200).json({ status: 'OK' }));
