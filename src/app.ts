@@ -13,12 +13,12 @@ app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                defaultSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000", "https://sportsbetsfront.vercel.app"], // Allow localhost, Render, and Vercel domain
+                defaultSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000", "https://fredssports.vercel.app"], // Allow localhost, Render, and Vercel domain
                 scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
                 styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
                 imgSrc: ["'self'", "data:"],
                 fontSrc: ["'self'", "https://fonts.gstatic.com"],
-                connectSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000", "https://sportsbetsfront.vercel.app"], // Backend and frontend origins
+                connectSrc: ["'self'", "https://sportsback.onrender.com", "http://localhost:3000", "https://fredssports.vercel.app"], // Backend and frontend origins
             },
         },
         crossOriginEmbedderPolicy: false,
@@ -27,7 +27,7 @@ app.use(
 
 // Enable CORS
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://sportsback.onrender.com', 'https://sportsbetsfront.vercel.app'], // Allow localhost, the backend, and the deployed frontend on Vercel
+    origin: ['http://localhost:3000', 'https://sportsback.onrender.com', 'https://fredssports.vercel.app'], // Allow localhost, the backend, and the deployed frontend on Vercel
     credentials: true,
 }));
 
