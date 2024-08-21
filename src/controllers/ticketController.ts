@@ -4,15 +4,14 @@ import Bet from '../models/bet';  // Assuming you're using the Bet model to hand
 // POST - Create a new ticket with image upload
 export const postTicket = async (req: Request, res: Response) => {
     try {
-        const { description, result } = req.body;
+        const { description, result, team } = req.body; // Accept 'team' from the request body
 
         // Validate required fields
-        if (!description || !result) {
-            return res.status(400).json({ error: 'Description (image URL) and result are required.' });
+        if (!description || !result || !team) {
+            return res.status(400).json({ error: 'Description (image URL), result, and team are required.' });
         }
 
-        // Set default values for required fields not provided by the image upload
-        const defaultTeam = 'Default Team';
+        // Set default values for other fields not provided by the image upload
         const defaultOpponent = 'Default Opponent';
         const defaultAmount = 100;  // You can adjust this as needed
         const defaultOdds = '+100';  // You can adjust this as needed
@@ -22,7 +21,7 @@ export const postTicket = async (req: Request, res: Response) => {
 
         // Create a new ticket in the database
         const newTicket = await Bet.create({
-            team: defaultTeam,
+            team,  // Custom team name from the request body
             opponent: defaultOpponent,
             amount: defaultAmount,
             odds: defaultOdds,
