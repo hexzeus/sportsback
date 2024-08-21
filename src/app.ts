@@ -5,6 +5,7 @@ import path from 'path';
 import adminRoutes from './routes/adminRoutes'; // Admin routes
 import betRoutes from './routes/betRoutes'; // Bet routes
 import s3Routes from './routes/s3Routes'; // S3 routes
+import ticketRoutes from './routes/ticketRoutes'; // Ticket routes for handling tickets with image uploads
 import { errorHandler } from './middlewares/errorHandler'; // Error handling middleware
 
 const app = express();
@@ -28,7 +29,7 @@ app.use(
 
 // Enable CORS
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://sportsback.onrender.com', 'https://fredssports.vercel.app'], // Allow localhost, the backend, and the deployed frontend on Vercel
+    origin: ['http://localhost:3000', 'https://sportsback.onrender.com', 'https://fredssports.vercel.app'], // Allow localhost, Render, and the deployed frontend on Vercel
     credentials: true,
 }));
 
@@ -39,10 +40,11 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Admin, bet, and S3 routes
-app.use('/api/admin', adminRoutes);
-app.use('/api/bets', betRoutes);
-app.use('/api/s3', s3Routes); // S3 routes for handling presigned URL requests
+// Routes
+app.use('/api/admin', adminRoutes);    // Admin routes
+app.use('/api/bets', betRoutes);       // Bet routes
+app.use('/api/s3', s3Routes);          // S3 routes for image uploads
+app.use('/api/tickets', ticketRoutes); // Ticket routes for creating tickets
 
 // Health check route
 app.get('/health', (req, res) => res.status(200).json({ status: 'OK' }));
