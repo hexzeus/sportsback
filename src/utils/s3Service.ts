@@ -10,16 +10,15 @@ const s3Client = new S3Client({
     },
 });
 
-// Function to get a presigned URL for uploading an image
-export const getPresignedUrl = async (fileName: string, fileType: string) => {
+// Service function to generate a presigned URL for uploading files to S3
+export const getPresignedUrlService = async (fileName: string, fileType: string) => {
     const command = new PutObjectCommand({
         Bucket: process.env.AWS_S3_BUCKET_NAME, // Your S3 bucket name
         Key: fileName, // The file name or path
         ContentType: fileType, // MIME type of the file
     });
 
-    // Generate the signed URL
+    // Generate the presigned URL with a 60-second expiration
     const presignedUrl = await getSignedUrl(s3Client, command, { expiresIn: 60 });
-
     return presignedUrl;
 };
