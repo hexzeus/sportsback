@@ -1,6 +1,16 @@
 import { Request, Response } from 'express';
 import Bet from '../models/bet';
 
+// Utility function to validate URLs
+const isValidUrl = (string: string) => {
+    try {
+        new URL(string);
+        return true;
+    } catch (_) {
+        return false;
+    }
+};
+
 // POST - Create a new bet
 export const postBet = async (req: Request, res: Response) => {
     try {
@@ -11,13 +21,18 @@ export const postBet = async (req: Request, res: Response) => {
             return res.status(400).json({ error: 'All fields are required, including betType, opponent, ticketCost, and payout.' });
         }
 
+        // Validate the description if it contains a URL (for image upload)
+        if (description && isValidUrl(description)) {
+            console.log('Valid image URL');
+        }
+
         // Create a new bet entry in the database
         const newBet = await Bet.create({
             team,
             opponent,
             amount,
             odds: odds.toString(),  // Ensure odds are stored as a string
-            description,
+            description, // Description could be plain text or an image URL
             date: new Date(date),
             result,
             betType,
@@ -44,12 +59,17 @@ export const updateBet = async (req: Request, res: Response) => {
             return res.status(404).json({ error: 'Bet not found' });
         }
 
+        // Validate the description if it contains a URL (for image upload)
+        if (description && isValidUrl(description)) {
+            console.log('Valid image URL');
+        }
+
         // Update the bet with the provided values, keeping existing values if not provided
         bet.team = team !== undefined ? team : bet.team;
         bet.opponent = opponent !== undefined ? opponent : bet.opponent;
         bet.amount = amount !== undefined ? amount : bet.amount;
         bet.odds = odds !== undefined ? odds.toString() : bet.odds;  // Ensure odds are updated as a string
-        bet.description = description !== undefined ? description : bet.description;
+        bet.description = description !== undefined ? description : bet.description; // Could be text or image URL
         bet.date = date !== undefined ? new Date(date) : bet.date;
         bet.result = result !== undefined ? result : bet.result;
         bet.betType = betType !== undefined ? betType : bet.betType;

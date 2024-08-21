@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { getPresignedUrl } from '../utils/s3Service'; // Utility function to generate presigned URL
+import { getPresignedUrl } from '../utils/s3Service'; // Assuming this is the correct path
 
 const router = Router();
 
-// Route to generate a presigned URL for S3 uploads
+// POST route to get a presigned URL for uploading to S3
 router.post('/get-upload-url', async (req, res) => {
     const { fileName, fileType } = req.body;
 
