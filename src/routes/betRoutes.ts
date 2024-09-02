@@ -13,4 +13,4 @@ router.post('/', verifyAdminToken, postBet); // Admins create bets
 router.put('/:id', verifyAdminToken, updateBet); // Admins update bets
 router.delete('/:id', verifyAdminToken, deleteBet); // Admins delete bets
 
-export default router;
+export default router; // triggering deploy with this message
